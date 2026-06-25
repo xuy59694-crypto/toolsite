@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL在线编解码 - URL编码解码工具</title>
+    <meta name="description" content="免费在线URL编码解码工具，支持URL参数编码解码，处理中文和特殊字符。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            在线工具箱
+        </a>
+        <nav class="header-nav">
+            <a href="../index.html">首页</a>
+            <a href="../tools/image-compress.html">图片工具</a>
+            <a href="../tools/qrcode.html">生成工具</a>
+            <a href="../tools/json-formatter.html">开发工具</a>
+        </nav>
+    </div>
+</header>
+
+<main class="tool-page container">
+    <div class="tool-page-header">
+        <h1>🔗 URL 编解码</h1>
+        <p>URL 编码和解码工具，处理网址中的中文和特殊字符。</p>
+    </div>
+    <div class="tool-workspace">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+        <textarea id="inputText" placeholder="输入要编码的文本或要解码的URL..." style="min-height:180px;font-family:monospace;"></textarea>
+        <div class="controls-row">
+            <button class="btn btn-primary" onclick="urlEncode()">🔒 URL编码</button>
+            <button class="btn btn-primary" onclick="urlDecode()">🔓 URL解码</button>
+            <button class="btn btn-secondary" onclick="copyResult()">📋 复制</button>
+        </div>
+    </div>
+    <div style="flex:1;min-width:280px;">
+        <div id="outputArea" class="result-area" style="background:var(--bg);border:1px solid var(--border);min-height:180px;">等待输入...</div>
+    </div>
+</div>
+<script>
+function urlEncode() {
+    var t = document.getElementById("inputText").value;
+    if (!t) { showToast("请输入内容"); return; }
+    document.getElementById("outputArea").innerHTML = '<pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + encodeURIComponent(t) + '</pre>';
+}
+function urlDecode() {
+    var t = document.getElementById("inputText").value;
+    if (!t) { showToast("请输入内容"); return; }
+    try {
+        document.getElementById("outputArea").innerHTML = '<pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + decodeURIComponent(t) + '</pre>';
+    } catch(e) {
+        document.getElementById("outputArea").innerHTML = '<p style="color:#dc2626;">解码失败：无效的编码字符串</p>';
+    }
+}
+function copyResult() { copyToClipboard(document.getElementById("outputArea").textContent); }
+</script>
+        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+    </div>
+</main>
+
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+</body>
+</html>

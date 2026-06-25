@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线图片压缩 - 免费压缩PNG/JPEG/WebP图片，无损减小文件体积</title>
+    <meta name="description" content="免费在线图片压缩工具，支持PNG、JPEG、WebP格式，可调节压缩质量，无损/有损压缩，保持画质的同时大幅减小文件体积。无需上传服务器，本地处理，安全快速。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            在线工具箱
+        </a>
+        <nav class="header-nav">
+            <a href="../index.html">首页</a>
+            <a href="../tools/image-compress.html">图片工具</a>
+            <a href="../tools/qrcode.html">生成工具</a>
+            <a href="../tools/json-formatter.html">开发工具</a>
+        </nav>
+    </div>
+</header>
+
+<main class="tool-page container">
+    <div class="tool-page-header">
+        <h1>🗜️ 在线图片压缩</h1>
+        <p>支持 PNG / JPEG / WebP 格式，可调节压缩质量，所有处理均在本地完成，不上传服务器。</p>
+    </div>
+
+    <div class="tool-workspace">
+        <div style="text-align:center;padding:40px 20px;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:16px;" id="dropZone">
+            <div style="font-size:3rem;margin-bottom:12px;">📁</div>
+            <p style="font-weight:600;margin-bottom:4px;">点击选择图片或拖拽到此处</p>
+            <p style="color:var(--text-secondary);font-size:0.85rem;">支持 PNG / JPEG / WebP，单文件最大 20MB</p>
+            <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" style="display:none;" multiple>
+        </div>
+
+        <div id="previewArea" style="display:none;">
+            <div class="controls-row">
+                <label style="font-weight:600;white-space:nowrap;">压缩质量：</label>
+                <input type="range" id="qualityRange" min="10" max="100" value="75" style="flex:1;max-width:300px;">
+                <span id="qualityLabel" style="font-weight:600;min-width:40px;">75%</span>
+                <select id="formatSelect" style="width:auto;">
+                    <option value="auto">保持原格式</option>
+                    <option value="image/jpeg">JPEG</option>
+                    <option value="image/png">PNG</option>
+                    <option value="image/webp">WebP</option>
+                </select>
+                <button class="btn btn-primary" onclick="compressAll()">🔽 压缩全部</button>
+                <button class="btn btn-secondary" onclick="downloadAll()">📥 下载全部</button>
+            </div>
+            <div id="imageList" style="display:flex;flex-direction:column;gap:12px;"></div>
+        </div>
+
+        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p>
+</footer>
+
+<script src="../js/common.js"></script>
+<script>
+var images = [];
+var dropZone = document.getElementById("dropZone");
+var fileInput = document.getElementById("fileInput");
+var previewArea = document.getElementById("previewArea");
+var qualityRange = document.getElementById("qualityRange");
+var qualityLabel = document.getElementById("qualityLabel");
+var imageList = document.getElementById("imageList");
+
+dropZone.addEventListener("click", function() { fileInput.click(); });
+dropZone.addEventListener("dragover", function(e) { e.preventDefault(); dropZone.style.borderColor = "var(--primary)"; });
+dropZone.addEventListener("dragleave", function() { dropZone.style.borderColor = "var(--border)"; });
+dropZone.addEventListener("drop", function(e) { e.preventDefault(); dropZone.style.borderColor = "var(--border)"; handleFiles(e.dataTransfer.files); });
+fileInput.addEventListener("change", function() { handleFiles(fileInput.files); });
+qualityRange.addEventListener("input", function() { qualityLabel.textContent = qualityRange.value + "%"; });
+
+function handleFiles(files) {
+    for (var i = 0; i < files.length; i++) {
+        var f = files[i];
+        if (!f.type.match(/image\/(png|jpeg|webp)/)) continue;
+        var reader = new FileReader();
+        reader.onload = (function(file) {
+            return function(e) {
+                images.push({ name: file.name, original: e.target.result, size: file.size, compressed: null, compSize: 0 });
+                renderImages();
+            };
+        })(f);
+        reader.readAsDataURL(f);
+    }
+    if (images.length > 0) { previewArea.style.display = "block"; dropZone.style.padding = "20px"; }
+}
+
+function renderImages() {
+    imageList.innerHTML = "";
+    for (var i = 0; i < images.length; i++) {
+        var img = images[i];
+        var div = document.createElement("div");
+        div.style.cssText = "display:flex;align-items:center;gap:16px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);";
+        div.innerHTML = '<img src="' + img.original + '" style="width:80px;height:80px;object-fit:cover;border-radius:6px;">' +
+            '<div style="flex:1;min-width:0;"><p style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + img.name + '</p>' +
+            '<p style="font-size:0.85rem;color:var(--text-secondary);">原始: ' + formatSize(img.size) + (img.compSize ? ' → 压缩后: ' + formatSize(img.compSize) + ' (节省 ' + Math.round((1 - img.compSize/img.size)*100) + '%)' : '') + '</p></div>' +
+            '<button class="btn btn-primary" style="white-space:nowrap;font-size:0.85rem;" onclick="compressOne(' + i + ')">压缩</button>' +
+            '<button class="btn btn-secondary" style="white-space:nowrap;font-size:0.85rem;" onclick="downloadOne(' + i + ')" ' + (img.compressed ? '' : 'disabled') + '>下载</button>';
+        imageList.appendChild(div);
+    }
+}
+
+function compressOne(idx) {
+    var img = images[idx];
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext("2d");
+    var image = new Image();
+    image.onload = function() {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+        var format = document.getElementById("formatSelect").value;
+        var mime = format === "auto" ? "image/" + img.name.split(".").pop().replace("jpg","jpeg") : format;
+        canvas.toBlob(function(blob) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                img.compressed = e.target.result;
+                img.compSize = blob.size;
+                renderImages();
+            };
+            reader.readAsDataURL(blob);
+        }, mime, qualityRange.value / 100);
+    };
+    image.src = img.original;
+}
+
+function compressAll() {
+    for (var i = 0; i < images.length; i++) compressOne(i);
+}
+
+function downloadOne(idx) {
+    var img = images[idx];
+    if (!img.compressed) return;
+    var ext = img.name.split(".").pop();
+    downloadFile(img.compressed, img.name.replace("."+ext, "_compressed."+ext), "application/octet-stream");
+}
+
+function downloadAll() {
+    for (var i = 0; i < images.length; i++) {
+        if (images[i].compressed) setTimeout(function(j){ return function(){ downloadOne(j); }; }(i), i * 300);
+    }
+}
+
+function formatSize(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / 1048576).toFixed(2) + " MB";
+}
+</script>
+</body>
+</html>

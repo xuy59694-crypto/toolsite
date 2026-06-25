@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线UUID生成器 - 批量生成UUID/GUID标识符</title>
+    <meta name="description" content="免费在线UUID/GUID生成器，支持批量生成UUID v4，一键复制或下载。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            在线工具箱
+        </a>
+        <nav class="header-nav">
+            <a href="../index.html">首页</a>
+            <a href="../tools/image-compress.html">图片工具</a>
+            <a href="../tools/qrcode.html">生成工具</a>
+            <a href="../tools/json-formatter.html">开发工具</a>
+        </nav>
+    </div>
+</header>
+
+<main class="tool-page container">
+    <div class="tool-page-header">
+        <h1>🆔 UUID 生成器</h1>
+        <p>在线批量生成 UUID / GUID，支持一键复制和批量下载。</p>
+    </div>
+    <div class="tool-workspace">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+        <div class="controls-row">
+            <label style="font-weight:600;">生成数量：</label>
+            <select id="countSelect" style="width:auto;">
+                <option value="1">1 个</option>
+                <option value="5" selected>5 个</option>
+                <option value="10">10 个</option>
+                <option value="20">20 个</option>
+                <option value="50">50 个</option>
+            </select>
+            <button class="btn btn-primary" onclick="generateUUIDs()">🎲 生成</button>
+            <button class="btn btn-secondary" onclick="copyAll()">📋 全部复制</button>
+        </div>
+        <div style="margin-top:8px;">
+            <label style="font-weight:600;display:block;margin-bottom:4px;">格式：</label>
+            <label style="margin-right:16px;"><input type="radio" name="format" value="standard" checked> 标准 (带横线)</label>
+            <label style="margin-right:16px;"><input type="radio" name="format" value="compact"> 紧凑 (无横线)</label>
+            <label><input type="radio" name="format" value="upper"> 大写</label>
+        </div>
+    </div>
+</div>
+<div id="uuidList" style="margin-top:16px;font-family:monospace;font-size:0.95rem;line-height:2;"></div>
+<script>
+function generateUUID() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === "x" ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+function generateUUIDs() {
+    var count = parseInt(document.getElementById("countSelect").value);
+    var format = document.querySelector('input[name="format"]:checked').value;
+    var html = "";
+    for (var i = 0; i < count; i++) {
+        var uuid = generateUUID();
+        if (format === "compact") uuid = uuid.replace(/-/g, "");
+        if (format === "upper") uuid = uuid.toUpperCase();
+        html += '<div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="color:var(--text-secondary);">' + (i+1) + '.</span> <code style="background:var(--bg-secondary);padding:2px 8px;border-radius:4px;">' + uuid + '</code></div>';
+    }
+    document.getElementById("uuidList").innerHTML = html;
+}
+function copyAll() { copyToClipboard(document.getElementById("uuidList").textContent); }
+generateUUIDs();
+</script>
+        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+    </div>
+</main>
+
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+</body>
+</html>

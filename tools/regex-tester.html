@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线正则表达式测试 - 正则匹配、替换、高亮工具</title>
+    <meta name="description" content="免费在线正则表达式测试工具，支持JavaScript正则语法，实时匹配高亮。">
+    <link rel="stylesheet" href="../css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            在线工具箱
+        </a>
+        <nav class="header-nav">
+            <a href="../index.html">首页</a>
+            <a href="../tools/image-compress.html">图片工具</a>
+            <a href="../tools/qrcode.html">生成工具</a>
+            <a href="../tools/json-formatter.html">开发工具</a>
+        </nav>
+    </div>
+</header>
+
+<main class="tool-page container">
+    <div class="tool-page-header">
+        <h1>🧩 正则表达式测试</h1>
+        <p>在线测试正则表达式，实时高亮匹配结果 —— 开发者调试利器。</p>
+    </div>
+    <div class="tool-workspace">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+        <label style="font-weight:600;display:block;margin-bottom:6px;">正则表达式</label>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+            <span style="font-family:monospace;font-size:1.1rem;">/</span>
+            <input type="text" id="regexInput" placeholder="例如：\d{3}-\d{4}" style="font-family:monospace;flex:1;" oninput="testRegex()">
+            <span style="font-family:monospace;font-size:1.1rem;">/</span>
+            <select id="flagsSelect" style="width:auto;" onchange="testRegex()">
+                <option value="">无</option>
+                <option value="g">g</option>
+                <option value="i">i</option>
+                <option value="gi">gi</option>
+                <option value="gm">gm</option>
+                <option value="gim">gim</option>
+            </select>
+        </div>
+        <label style="font-weight:600;display:block;margin-bottom:6px;">测试文本</label>
+        <textarea id="testText" placeholder="输入要测试的文本..." style="min-height:150px;font-family:monospace;" oninput="testRegex()"></textarea>
+    </div>
+    <div style="flex:1;min-width:280px;">
+        <label style="font-weight:600;display:block;margin-bottom:6px;">匹配结果</label>
+        <div id="matchResult" style="padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:150px;overflow-y:auto;">
+            <p style="color:var(--text-secondary);">输入正则和文本后查看结果</p>
+        </div>
+    </div>
+</div>
+<script>
+function testRegex() {
+    var pattern = document.getElementById("regexInput").value;
+    var text = document.getElementById("testText").value;
+    var flags = document.getElementById("flagsSelect").value;
+    var resultDiv = document.getElementById("matchResult");
+    if (!pattern) { resultDiv.innerHTML = '<p style="color:var(--text-secondary);">输入正则表达式</p>'; return; }
+    try {
+        var re = new RegExp(pattern, flags);
+        var matches = text.match(re);
+        if (matches) {
+            if (flags.includes("g")) {
+                var highlighted = text.replace(re, function(m) { return '<mark style="background:#fef08a;padding:0 2px;border-radius:2px;">' + m + '</mark>'; });
+                resultDiv.innerHTML = '<p style="font-weight:600;color:#059669;margin-bottom:8px;">✅ 共 ' + matches.length + ' 处匹配</p><pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + highlighted + '</pre><p style="margin-top:8px;"><strong>匹配项：</strong>' + matches.join(", ") + '</p>';
+            } else {
+                var highlighted = text.replace(re, '<mark style="background:#fef08a;padding:0 2px;border-radius:2px;">$&</mark>');
+                resultDiv.innerHTML = '<p style="font-weight:600;color:#059669;margin-bottom:8px;">✅ 匹配成功</p><pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + highlighted + '</pre><p style="margin-top:8px;"><strong>匹配项：</strong>' + matches[0] + '</p>';
+            }
+        } else {
+            resultDiv.innerHTML = '<p style="color:#dc2626;">❌ 无匹配结果</p>';
+        }
+    } catch(e) {
+        resultDiv.innerHTML = '<p style="color:#dc2626;">❌ 正则语法错误：' + e.message + '</p>';
+    }
+}
+</script>
+        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+    </div>
+</main>
+
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+</body>
+</html>
