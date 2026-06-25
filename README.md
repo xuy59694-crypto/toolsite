@@ -96,7 +96,7 @@ toolsite/
 ## ⚠️ 重要提醒
 
 - 部署前记得替换所有 HTML 中的 `ca-pub-XXXXXXXXXXXXXXXX` 为你自己的 AdSense ID
-- sitemap.xml 中的 `your-site.com` 需要替换为你的实际域名
+- sitemap.xml 中的 `toolhub.uno` 需要替换为你的实际域名
 - 建议绑定自定义域名（可选），看起来更专业
 - 广告审核通过前不要放太多广告位，先以内容为主
 
