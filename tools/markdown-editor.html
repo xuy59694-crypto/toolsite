@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在线Markdown编辑器 - 实时预览Markdown转HTML</title><meta name="description" content="免费在线Markdown编辑器，支持实时预览、语法高亮，一键复制HTML，写作和开发者必备。"><link rel="stylesheet" href="../css/style.css"><base href="/">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片工具</a><a href="/tools/qrcode.html">生成工具</a><a href="/tools/json-formatter.html">开发工具</a></nav></div></header>
+<main class="tool-page container"><div class="tool-page-header"><h1>📝 Markdown 编辑器</h1><p>在线 Markdown 编辑，实时预览，一键复制渲染后的 HTML 代码。</p></div>
+<div class="tool-workspace">
+    <div class="controls-row" style="margin-bottom:12px;">
+        <button class="btn btn-primary" onclick="copyHTML()">📋 复制 HTML</button>
+        <button class="btn btn-secondary" onclick="downloadMD()">📥 下载 MD</button>
+        <button class="btn btn-secondary" onclick="insertDemo()">📄 示例</button>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+            <label style="font-weight:600;display:block;margin-bottom:6px;">Markdown 源码</label>
+            <textarea id="mdInput" style="min-height:400px;font-family:monospace;" oninput="renderMD()" placeholder="输入 Markdown 文本..."># Hello Markdown
+
+## 二级标题
+
+**粗体** *斜体* ~~删除线~~
+
+- 列表项 1
+- 列表项 2
+
+1. 有序列表
+2. 第二项
+
+`行内代码`
+
+```javascript
+console.log("代码块");
+```
+
+> 引用文字
+
+[链接](https://example.com)
+</textarea>
+        </div>
+        <div style="flex:1;min-width:280px;">
+            <label style="font-weight:600;display:block;margin-bottom:6px;">预览</label>
+            <div id="mdPreview" style="padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:400px;overflow-y:auto;"></div>
+        </div>
+    </div>
+    <div class="ad-slot" style="margin-top:24px;">广告位</div>
+</div></main>
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+<script>
+function renderMD(){ document.getElementById("mdPreview").innerHTML=marked.parse(document.getElementById("mdInput").value); }
+function copyHTML(){ copyToClipboard(document.getElementById("mdPreview").innerHTML); }
+function downloadMD(){ downloadFile(document.getElementById("mdInput").value,"document.md","text/markdown"); }
+function insertDemo(){
+    document.getElementById("mdInput").value="# Hello Markdown\n\n## 二级标题\n\n**粗体** *斜体*\n\n- 列表项\n\n```js\nconsole.log(1)\n```";
+    renderMD();
+}
+renderMD();
+</script>
+</body></html>

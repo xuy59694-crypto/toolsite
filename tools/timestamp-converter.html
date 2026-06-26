@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线时间戳转换 - Unix时间戳转日期、日期转时间戳</title>
+    <meta name="description" content="免费在线时间戳转换工具，Unix时间戳与日期相互转换，支持秒/毫秒级，实时显示各时区时间。">
+    <link rel="stylesheet" href="../css/style.css">
+    <base href="/">
+</head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片工具</a><a href="/tools/qrcode.html">生成工具</a><a href="/tools/json-formatter.html">开发工具</a></nav></div></header>
+<main class="tool-page container">
+    <div class="tool-page-header"><h1>⏰ 时间戳转换</h1><p>Unix 时间戳与日期互转，实时显示当前时间戳，支持秒/毫秒。</p></div>
+    <div class="tool-workspace">
+        <div style="background:var(--bg-secondary);padding:20px;border-radius:var(--radius);text-align:center;margin-bottom:24px;">
+            <p style="color:var(--text-secondary);font-size:0.85rem;">当前时间戳（秒）</p>
+            <p style="font-size:2rem;font-weight:800;font-family:monospace;color:var(--primary);" id="liveTS">-</p>
+            <p style="font-size:0.85rem;color:var(--text-secondary);" id="liveDate"></p>
+        </div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:250px;">
+                <label style="font-weight:600;display:block;margin-bottom:6px;">时间戳 → 日期</label>
+                <input type="text" id="tsInput" placeholder="输入时间戳，如 1717200000" oninput="tsToDate()" style="font-family:monospace;">
+                <select id="tsUnit" onchange="tsToDate()" style="width:100%;margin-top:8px;"><option value="s">秒</option><option value="ms">毫秒</option></select>
+                <div id="tsResult" style="margin-top:12px;padding:12px;background:var(--bg-secondary);border-radius:var(--radius-sm);font-family:monospace;">输入时间戳查看日期</div>
+            </div>
+            <div style="flex:1;min-width:250px;">
+                <label style="font-weight:600;display:block;margin-bottom:6px;">日期 → 时间戳</label>
+                <input type="datetime-local" id="dtInput" onchange="dateToTs()" style="font-family:monospace;">
+                <div id="dtResult" style="margin-top:12px;padding:12px;background:var(--bg-secondary);border-radius:var(--radius-sm);font-family:monospace;">选择日期查看时间戳</div>
+            </div>
+        </div>
+        <div class="ad-slot" style="margin-top:24px;">广告位</div>
+    </div>
+</main>
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+<script>
+function updateLive(){ var now=Math.floor(Date.now()/1000); document.getElementById("liveTS").textContent=now; document.getElementById("liveDate").textContent=new Date().toLocaleString("zh-CN"); }
+updateLive(); setInterval(updateLive,1000);
+function tsToDate(){
+    var v=document.getElementById("tsInput").value.trim();
+    if(!v){ document.getElementById("tsResult").textContent="输入时间戳查看日期"; return; }
+    var ts=parseInt(v);
+    if(document.getElementById("tsUnit").value==="ms") ts=Math.floor(ts/1000);
+    var d=new Date(ts*1000);
+    if(isNaN(d.getTime())){ document.getElementById("tsResult").textContent="无效的时间戳"; return; }
+    document.getElementById("tsResult").textContent="本地时间："+d.toLocaleString("zh-CN")+"\nUTC时间："+d.toUTCString();
+}
+function dateToTs(){
+    var v=document.getElementById("dtInput").value;
+    if(!v){ document.getElementById("dtResult").textContent="选择日期查看时间戳"; return; }
+    var d=new Date(v);
+    var ts=Math.floor(d.getTime()/1000);
+    document.getElementById("dtResult").textContent="秒："+ts+"\n毫秒："+d.getTime()+"\n格式化："+d.toString();
+}
+</script>
+</body>
+</html>

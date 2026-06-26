@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在线JS/CSS压缩 - JavaScript和CSS代码压缩工具</title><meta name="description" content="免费在线JavaScript和CSS代码压缩工具，支持JS压缩、CSS压缩，减小文件体积，提升网站加载速度。"><link rel="stylesheet" href="../css/style.css"><base href="/"></head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片工具</a><a href="/tools/qrcode.html">生成工具</a><a href="/tools/json-formatter.html">开发工具</a></nav></div></header>
+<main class="tool-page container"><div class="tool-page-header"><h1>🗜️ JS / CSS 压缩</h1><p>压缩 JavaScript 和 CSS 代码，移除空格和注释，减小文件体积。</p></div>
+<div class="tool-workspace">
+    <div class="controls-row" style="margin-bottom:12px;">
+        <select id="langSelect" style="width:auto;"><option value="js">JavaScript</option><option value="css">CSS</option></select>
+        <button class="btn btn-primary" onclick="minify()">🗜️ 压缩</button>
+        <button class="btn btn-secondary" onclick="beautify()">✨ 格式化</button>
+        <button class="btn btn-secondary" onclick="copyResult()">📋 复制</button>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;"><textarea id="sourceCode" placeholder="粘贴 JS 或 CSS 代码..." style="min-height:300px;font-family:monospace;"></textarea></div>
+        <div style="flex:1;min-width:280px;"><label style="font-weight:600;display:block;margin-bottom:6px;">输出</label><div id="outputCode" class="result-area" style="background:var(--bg);border:1px solid var(--border);min-height:300px;"></div></div>
+    </div>
+    <div class="ad-slot" style="margin-top:24px;">广告位</div>
+</div></main>
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+<script>
+var sampleJS='function add(a,b){\n  // 返回和\n  var result=a+b;\n  return result;\n}';
+var sampleCSS='body {\n  margin: 0;\n  padding: 0;\n  /* 背景色 */\n  background: #fff;\n}';
+document.getElementById("sourceCode").value=sampleJS;
+document.getElementById("langSelect").onchange=function(){
+    document.getElementById("sourceCode").value=this.value==="js"?sampleJS:sampleCSS;
+};
+
+function minify(){
+    var code=document.getElementById("sourceCode").value.trim(), lang=document.getElementById("langSelect").value;
+    if(!code) return;
+    if(lang==="css"){ code=code.replace(/\/\*[\s\S]*?\*\//g,"").replace(/\s+/g," ").replace(/\s*([{}:;,])\s*/g,"$1").trim(); }
+    else{ code=code.replace(/\/\/.*$/gm,"").replace(/\/\*[\s\S]*?\*\//g,"").replace(/\s+/g," ").replace(/\s*([{}()[\];,:])\s*/g,"$1").trim(); }
+    showResult(code);
+}
+function beautify(){
+    var code=document.getElementById("sourceCode").value.trim(), lang=document.getElementById("langSelect").value;
+    if(!code) return;
+    if(lang==="css"){ code=code.replace(/\{/g,"{\n  ").replace(/\}/g,"\n}\n").replace(/;/g,";\n  "); }
+    else{ code=code.replace(/\{/g,"{\n  ").replace(/\}/g,"\n}").replace(/;/g,";\n  ").replace(/,\s*/g,",\n  "); }
+    showResult(code);
+}
+function showResult(code){ document.getElementById("outputCode").innerHTML='<pre style="margin:0;white-space:pre-wrap;">'+code+'</pre>'; }
+function copyResult(){ copyToClipboard(document.getElementById("outputCode").textContent); }
+</script>
+</body></html>

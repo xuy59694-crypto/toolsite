@@ -13,4 +13,11 @@
     <url><loc>https://toolhub.uno/tools/md5.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
     <url><loc>https://toolhub.uno/tools/regex-tester.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
     <url><loc>https://toolhub.uno/tools/uuid-generator.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-</urlset>
+    <url><loc>https://toolhub.uno/tools/password-generator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://toolhub.uno/tools/timestamp-converter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://toolhub.uno/tools/unit-converter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://toolhub.uno/tools/markdown-editor.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://toolhub.uno/tools/lorem-ipsum.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://toolhub.uno/tools/css-gradient.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://toolhub.uno/tools/minifier.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://toolhub.uno/tools/html-entity.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url></urlset>

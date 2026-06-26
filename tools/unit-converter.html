@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在线单位换算 - 长度、重量、温度、面积、体积换算器</title><meta name="description" content="免费在线单位换算工具，支持长度、重量、温度、面积、体积、速度等多种单位互转，实时计算。"><link rel="stylesheet" href="../css/style.css"><base href="/"></head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片工具</a><a href="/tools/qrcode.html">生成工具</a><a href="/tools/json-formatter.html">开发工具</a></nav></div></header>
+<main class="tool-page container"><div class="tool-page-header"><h1>📐 单位换算</h1><p>长度、重量、温度、面积、体积、速度等常用单位互转。</p></div>
+<div class="tool-workspace">
+    <div class="controls-row" style="margin-bottom:16px;">
+        <select id="category" onchange="changeCat()" style="width:auto;">
+            <option value="length">长度</option><option value="weight">重量</option><option value="temperature">温度</option><option value="area">面积</option><option value="volume">体积</option><option value="speed">速度</option>
+        </select>
+        <input type="number" id="inputVal" value="1" oninput="convert()" style="width:120px;text-align:center;font-size:1.1rem;font-weight:700;">
+        <select id="fromUnit" onchange="convert()" style="width:auto;"></select>
+        <span style="font-weight:700;">=</span>
+        <span id="resultVal" style="font-size:1.3rem;font-weight:700;color:var(--primary);">-</span>
+        <select id="toUnit" onchange="convert()" style="width:auto;"></select>
+    </div>
+    <div id="conversionHistory" style="margin-top:16px;"></div>
+    <div class="ad-slot" style="margin-top:24px;">广告位</div>
+</div></main>
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+<script>
+var units={
+    length:{ m:1, km:1000, cm:0.01, mm:0.001, mile:1609.344, yd:0.9144, ft:0.3048, inch:0.0254 },
+    weight:{ kg:1, g:0.001, mg:0.000001, ton:1000, lb:0.453592, oz:0.0283495 },
+    temperature:null,
+    area:{ m2:1, km2:1000000, cm2:0.0001, mm2:0.000001, ha:10000, acre:4046.86, ft2:0.092903 },
+    volume:{ l:1, ml:0.001, m3:1000, gal:3.78541, qt:0.946353, pt:0.473176, cup:0.24, floz:0.0295735 },
+    speed:{ ms:1, kmh:0.277778, mph:0.44704, knot:0.514444, fts:0.3048 }
+};
+function changeCat(){
+    var cat=document.getElementById("category").value, from=document.getElementById("fromUnit"), to=document.getElementById("toUnit");
+    from.innerHTML=""; to.innerHTML="";
+    if(cat==="temperature"){
+        ["Celsius","Fahrenheit","Kelvin"].forEach(function(u,i){ from.add(new Option(u,"celsi fahren kelvin".split(" ")[i])); to.add(new Option(u,"celsi fahren kelvin".split(" ")[i])); });
+    }else{
+        Object.keys(units[cat]).forEach(function(u){ from.add(new Option(u,u)); to.add(new Option(u,u)); });
+    }
+    to.selectedIndex=1; convert();
+}
+function convert(){
+    var cat=document.getElementById("category").value, val=parseFloat(document.getElementById("inputVal").value)||0;
+    var from=document.getElementById("fromUnit").value, to=document.getElementById("toUnit").value, result;
+    if(cat==="temperature"){ var c; if(from==="celsi") c=val; else if(from==="fahren") c=(val-32)*5/9; else c=val-273.15; if(to==="celsi") result=c; else if(to==="fahren") result=c*9/5+32; else result=c+273.15; }
+    else{ result=val*units[cat][from]/units[cat][to]; }
+    document.getElementById("resultVal").textContent=result.toPrecision(8)+" "+to;
+}
+changeCat();
+</script>
+</body></html>
