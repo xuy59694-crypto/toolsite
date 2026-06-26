@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在线PDF合并 - 免费合并多个PDF文件为一个</title><meta name="description" content="免费在线PDF合并工具，可将多个PDF文件合并为一个，浏览器本地处理，安全快速，无需上传服务器。"><link rel="stylesheet" href="../css/style.css"><base href="/">
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片工具</a><a href="/tools/qrcode.html">生成工具</a><a href="/tools/json-formatter.html">开发工具</a></nav></div></header>
+<main class="tool-page container"><div class="tool-page-header"><h1>📄 PDF 合并</h1><p>将多个 PDF 文件合并为一个，拖拽调整顺序，浏览器本地处理。</p></div>
+<div class="tool-workspace">
+    <div id="dropZone" style="text-align:center;padding:40px 20px;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:16px;">
+        <div style="font-size:3rem;margin-bottom:12px;">📁</div>
+        <p style="font-weight:600;">点击选择PDF文件或拖拽到此处</p>
+        <p style="color:var(--text-secondary);font-size:0.85rem;">支持多选，每个最大 50MB</p>
+        <input type="file" id="fileInput" accept=".pdf,application/pdf" multiple style="display:none;">
+    </div>
+    <div id="fileList" style="margin-bottom:16px;"></div>
+    <div class="controls-row" style="display:none;" id="actionRow">
+        <button class="btn btn-primary" onclick="mergePDFs()">📄 合并 PDF</button>
+        <span style="color:var(--text-secondary);font-size:0.85rem;">拖拽文件可调整顺序</span>
+    </div>
+    <div id="statusArea" style="text-align:center;margin-top:16px;font-weight:600;"></div>
+    <div class="ad-slot" style="margin-top:24px;">广告位</div>
+</div></main>
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+<script>
+var files=[], dragIdx=-1;
+var dz=document.getElementById("dropZone"), fi=document.getElementById("fileInput"), fl=document.getElementById("fileList"), ar=document.getElementById("actionRow");
+dz.addEventListener("click",function(){ fi.click(); });
+dz.addEventListener("dragover",function(e){ e.preventDefault(); dz.style.borderColor="var(--primary)"; });
+dz.addEventListener("dragleave",function(){ dz.style.borderColor="var(--border)"; });
+dz.addEventListener("drop",function(e){ e.preventDefault(); dz.style.borderColor="var(--border)"; addFiles(Array.from(e.dataTransfer.files)); });
+fi.addEventListener("change",function(){ addFiles(Array.from(fi.files)); fi.value=""; });
+
+function addFiles(newFiles){
+    for(var i=0;i<newFiles.length;i++){
+        if(newFiles[i].type!=="application/pdf"&&!newFiles[i].name.endsWith(".pdf")) continue;
+        files.push(newFiles[i]);
+    }
+    renderList();
+}
+
+function renderList(){
+    if(files.length===0){ fl.innerHTML=""; ar.style.display="none"; return; }
+    ar.style.display="flex";
+    var h="";
+    for(var i=0;i<files.length;i++){
+        h+='<div class="file-item" draggable="true" data-idx="'+i+'" style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;cursor:move;background:var(--bg);">'+
+            '<span style="font-size:1.5rem;">📄</span>'+
+            '<span style="flex:1;font-weight:500;">'+files[i].name+'</span>'+
+            '<span style="color:var(--text-secondary);font-size:0.85rem;">'+(files[i].size/1024/1024).toFixed(1)+' MB</span>'+
+            '<button class="btn btn-secondary" style="font-size:0.8rem;padding:4px 10px;" onclick="removeFile('+i+')">✕</button>'+
+        '</div>';
+    }
+    fl.innerHTML=h;
+    // Drag events
+    var items=document.querySelectorAll(".file-item");
+    items.forEach(function(item){
+        item.addEventListener("dragstart",function(e){ dragIdx=parseInt(e.target.dataset.idx||e.target.closest(".file-item").dataset.idx); e.dataTransfer.effectAllowed="move"; });
+        item.addEventListener("dragover",function(e){ e.preventDefault(); });
+        item.addEventListener("drop",function(e){
+            e.preventDefault();
+            var dropIdx=parseInt(e.target.dataset.idx||e.target.closest(".file-item").dataset.idx);
+            if(dragIdx!==dropIdx){ var tmp=files[dragIdx]; files.splice(dragIdx,1); files.splice(dropIdx,0,tmp); renderList(); }
+        });
+    });
+}
+
+function removeFile(idx){ files.splice(idx,1); renderList(); }
+
+async function mergePDFs(){
+    if(files.length<2){ showToast("请添加至少2个PDF文件"); return; }
+    document.getElementById("statusArea").textContent="正在合并...";
+    var pdfDoc=await PDFLib.PDFDocument.create();
+    for(var i=0;i<files.length;i++){
+        var ab=await files[i].arrayBuffer();
+        var srcDoc=await PDFLib.PDFDocument.load(ab);
+        var pages=await pdfDoc.copyPages(srcDoc,srcDoc.getPageIndices());
+        pages.forEach(function(p){ pdfDoc.addPage(p); });
+    }
+    var mergedBytes=await pdfDoc.save();
+    var blob=new Blob([mergedBytes],{type:"application/pdf"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a"); a.href=url; a.download="merged.pdf"; a.click();
+    URL.revokeObjectURL(url);
+    document.getElementById("statusArea").textContent="✅ 合并完成！已开始下载";
+}
+</script>
+</body></html>

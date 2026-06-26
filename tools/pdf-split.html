@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在线PDF拆分 - 提取或删除PDF页面</title><meta name="description" content="免费在线PDF拆分工具，可提取指定页面或删除页面，浏览器本地处理，安全快速。"><link rel="stylesheet" href="../css/style.css"><base href="/">
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片工具</a><a href="/tools/qrcode.html">生成工具</a><a href="/tools/json-formatter.html">开发工具</a></nav></div></header>
+<main class="tool-page container"><div class="tool-page-header"><h1>✂️ PDF 拆分</h1><p>从 PDF 中提取指定页面，或删除不需要的页面。</p></div>
+<div class="tool-workspace">
+    <div id="uploadArea" style="text-align:center;padding:40px;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:16px;" onclick="document.getElementById('fileInput').click()">
+        <div style="font-size:3rem;margin-bottom:12px;">📁</div>
+        <p style="font-weight:600;">点击选择 PDF 文件</p>
+        <input type="file" id="fileInput" accept=".pdf,application/pdf" style="display:none;">
+    </div>
+    <div id="pageArea" style="display:none;">
+        <p style="font-weight:600;margin-bottom:8px;" id="pageInfo"></p>
+        <label style="font-weight:600;display:block;margin-bottom:6px;">提取页面（例如：1,3,5-7）</label>
+        <div style="display:flex;gap:8px;">
+            <input type="text" id="pageInput" placeholder="1,3,5-7" style="flex:1;">
+            <button class="btn btn-primary" onclick="splitPDF('extract')">✂️ 提取所选</button>
+            <button class="btn btn-primary" onclick="splitPDF('remove')">🗑️ 删除所选</button>
+        </div>
+        <p style="color:var(--text-secondary);font-size:0.85rem;margin-top:4px;">支持格式：1,3,5-7（逗号分隔，横线表示范围）</p>
+    </div>
+    <div id="statusArea" style="text-align:center;margin-top:16px;font-weight:600;"></div>
+    <div class="ad-slot" style="margin-top:24px;">广告位</div>
+</div></main>
+<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<script src="../js/common.js"></script>
+<script>
+var pdfBytes=null, totalPages=0;
+document.getElementById("fileInput").addEventListener("change",async function(){
+    var file=this.files[0]; if(!file) return;
+    pdfBytes=await file.arrayBuffer();
+    var doc=await PDFLib.PDFDocument.load(pdfBytes); totalPages=doc.getPageCount();
+    document.getElementById("pageInfo").textContent="PDF共 "+totalPages+" 页，文件大小："+(file.size/1024/1024).toFixed(1)+" MB";
+    document.getElementById("uploadArea").style.display="none";
+    document.getElementById("pageArea").style.display="block";
+});
+
+function parsePages(input,max){
+    var pages=new Set();
+    input.split(",").forEach(function(part){
+        part=part.trim(); if(!part) return;
+        if(part.includes("-")){
+            var r=part.split("-"), s=parseInt(r[0]), e=parseInt(r[1]);
+            if(isNaN(s)||isNaN(e)) return;
+            for(var i=Math.max(1,s);i<=Math.min(e,max);i++) pages.add(i);
+        }else{
+            var n=parseInt(part);
+            if(!isNaN(n)&&n>=1&&n<=max) pages.add(n);
+        }
+    });
+    return Array.from(pages).sort(function(a,b){ return a-b; });
+}
+
+async function splitPDF(mode){
+    if(!pdfBytes){ showToast("请先选择PDF文件"); return; }
+    var input=document.getElementById("pageInput").value.trim();
+    if(!input){ showToast("请输入要处理的页码"); return; }
+    var selected=parsePages(input,totalPages);
+    if(selected.length===0){ showToast("无效的页码"); return; }
+    document.getElementById("statusArea").textContent="正在处理...";
+    var srcDoc=await PDFLib.PDFDocument.load(pdfBytes);
+    var newDoc=await PDFLib.PDFDocument.create();
+    for(var i=1;i<=totalPages;i++){
+        if(mode==="extract"&&selected.includes(i)){ var pages=await newDoc.copyPages(srcDoc,[i-1]); newDoc.addPage(pages[0]); }
+        else if(mode==="remove"&&!selected.includes(i)){ var pages=await newDoc.copyPages(srcDoc,[i-1]); newDoc.addPage(pages[0]); }
+    }
+    var resultBytes=await newDoc.save();
+    var blob=new Blob([resultBytes],{type:"application/pdf"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a"); a.href=url; a.download=mode==="extract"?"extracted.pdf":"removed.pdf"; a.click();
+    URL.revokeObjectURL(url);
+    document.getElementById("statusArea").textContent="✅ "+(mode==="extract"?"提取":"删除")+"完成！已开始下载";
+}
+</script>
+</body></html>

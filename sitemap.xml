@@ -20,4 +20,7 @@
     <url><loc>https://toolhub.uno/tools/lorem-ipsum.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
     <url><loc>https://toolhub.uno/tools/css-gradient.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
     <url><loc>https://toolhub.uno/tools/minifier.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-    <url><loc>https://toolhub.uno/tools/html-entity.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url></urlset>
+    <url><loc>https://toolhub.uno/tools/html-entity.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>    <url><loc>https://toolhub.uno/tools/pdf-merge.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+    <url><loc>https://toolhub.uno/tools/pdf-split.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+    <url><loc>https://toolhub.uno/tools/pdf-from-images.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://toolhub.uno/tools/pdf-to-images.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url></urlset>
