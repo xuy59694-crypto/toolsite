@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在线PDF转Word - 免费将PDF转换为Word文档</title><meta name="description" content="免费在线PDF转Word工具，将PDF文件转换为可编辑的Word文档(.docx)，保留文字和格式，转换快速。"><link rel="stylesheet" href="../css/style.css"><base href="/"></head>
+<body>
+<header><div class="header-inner"><a href="/" class="logo"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>在线工具箱</a><nav class="header-nav"><a href="/">首页</a><a href="/tools/image-compress.html">图片</a><a href="/tools/pdf-merge.html">PDF</a><a href="/tools/qrcode.html">生成</a><a href="/tools/json-formatter.html">开发</a><a href="/tools/unit-converter.html">换算</a><a href="/tools/word-count.html">文本</a></nav></div></header>
+<main class="tool-page container"><div class="tool-page-header"><h1>📄→📝 PDF 转 Word</h1><p>将 PDF 文件转换为可编辑的 Word 文档（.docx），保留文字内容。</p></div>
+<div class="tool-workspace">
+    <div id="uploadArea" style="text-align:center;padding:40px;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:16px;" onclick="document.getElementById('fileInput').click()">
+        <div style="font-size:3rem;">📁</div><p style="font-weight:600;">点击选择 PDF 文件</p><p style="color:var(--text-secondary);font-size:0.85rem;">最大 50MB · 转换后自动下载</p>
+        <input type="file" id="fileInput" accept=".pdf,application/pdf" style="display:none;">
+    </div>
+    <div id="statusArea" style="text-align:center;margin-top:16px;font-weight:600;"></div>
+    <p id="selectedFile" style="text-align:center;color:var(--text-secondary);margin-top:8px;"></p>
+    <div class="ad-slot" style="margin-top:24px;">广告位 - 支持本站</div>
+</div></main>
+<footer><div style="max-width:1200px;margin:0 auto;padding:0 24px;"><p style="text-align:center;color:var(--text-secondary);font-size:0.8rem;">&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p><p style="text-align:center;color:var(--text-secondary);font-size:0.75rem;margin-top:4px;">ICP备案号：待备案 | 如有侵权请联系删除</p></div></footer>
+<script src="../js/common.js"></script>
+<script>
+document.getElementById("fileInput").addEventListener("change", async function(){
+    var f=this.files[0]; if(!f) return;
+    document.getElementById("selectedFile").textContent="已选择："+f.name+"（"+(f.size/1024/1024).toFixed(1)+" MB）";
+    document.getElementById("statusArea").textContent="正在转换...";
+    var fd=new FormData(); fd.append("file",f);
+    try{
+        var res=await fetch("https://toolhub.uno:3000/convert/pdf-to-word",{method:"POST",body:fd});
+        if(!res.ok){ var err=await res.json(); throw new Error(err.error||"转换失败"); }
+        var blob=await res.blob();
+        var url=URL.createObjectURL(blob); var a=document.createElement("a"); a.href=url; a.download=f.name.replace(/\.pdf$/i,"")+".docx"; a.click(); URL.revokeObjectURL(url);
+        document.getElementById("statusArea").textContent="✅ 转换完成！已开始下载";
+    }catch(e){ document.getElementById("statusArea").textContent="❌ "+e.message; }
+});
+</script>
+</body></html>
