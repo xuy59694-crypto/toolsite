@@ -4,8 +4,8 @@
     <base href="https://toolhub.uno/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线图片压缩 - 免费压缩PNG/JPEG/WebP图片，无损减小文件体积</title>
-    <meta name="description" content="免费在线图片压缩工具，支持PNG、JPEG、WebP格式，可调节压缩质量，无损/有损压缩，保持画质的同时大幅减小文件体积。无需上传服务器，本地处理，安全快速。">
+    <title>鍦ㄧ嚎鍥剧墖鍘嬬缉 - 鍏嶈垂鍘嬬缉PNG/JPEG/WebP鍥剧墖锛屾棤鎹熷噺灏忔枃浠朵綋绉?/title>
+    <meta name="description" content="鍏嶈垂鍦ㄧ嚎鍥剧墖鍘嬬缉宸ュ叿锛屾敮鎸丳NG銆丣PEG銆乄ebP鏍煎紡锛屽彲璋冭妭鍘嬬缉璐ㄩ噺锛屾棤鎹?鏈夋崯鍘嬬缉锛屼繚鎸佺敾璐ㄧ殑鍚屾椂澶у箙鍑忓皬鏂囦欢浣撶Н銆傛棤闇€涓婁紶鏈嶅姟鍣紝鏈湴澶勭悊锛屽畨鍏ㄥ揩閫熴€?>
     <link rel="stylesheet" href="../css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
@@ -17,54 +17,53 @@
     <div class="header-inner">
         <a href="/" class="logo">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            在线工具箱
-        </a>
+            鍦ㄧ嚎宸ュ叿绠?        </a>
         <nav class="header-nav">
-            <a href="../index.html">首页</a>
-            <a href="../tools/image-compress.html">图片工具</a>
-            <a href="../tools/qrcode.html">生成工具</a>
-            <a href="../tools/json-formatter.html">开发工具</a>
+            <a href="../index.html">棣栭〉</a>
+            <a href="../tools/image-compress.html">鍥剧墖宸ュ叿</a>
+            <a href="../tools/qrcode.html">鐢熸垚宸ュ叿</a>
+            <a href="../tools/json-formatter.html">寮€鍙戝伐鍏?/a>
         </nav>
     </div>
 </header>
 
 <main class="tool-page container">
     <div class="tool-page-header">
-        <h1>🗜️ 在线图片压缩</h1>
-        <p>支持 PNG / JPEG / WebP 格式，可调节压缩质量，所有处理均在本地完成，不上传服务器。</p>
+        <h1>馃棞锔?鍦ㄧ嚎鍥剧墖鍘嬬缉</h1>
+        <p>鏀寔 PNG / JPEG / WebP 鏍煎紡锛屽彲璋冭妭鍘嬬缉璐ㄩ噺锛屾墍鏈夊鐞嗗潎鍦ㄦ湰鍦板畬鎴愶紝涓嶄笂浼犳湇鍔″櫒銆?/p>
     </div>
 
     <div class="tool-workspace">
         <div style="text-align:center;padding:40px 20px;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:16px;" id="dropZone">
-            <div style="font-size:3rem;margin-bottom:12px;">📁</div>
-            <p style="font-weight:600;margin-bottom:4px;">点击选择图片或拖拽到此处</p>
-            <p style="color:var(--text-secondary);font-size:0.85rem;">支持 PNG / JPEG / WebP，单文件最大 20MB</p>
+            <div style="font-size:3rem;margin-bottom:12px;">馃搧</div>
+            <p style="font-weight:600;margin-bottom:4px;">鐐瑰嚮閫夋嫨鍥剧墖鎴栨嫋鎷藉埌姝ゅ</p>
+            <p style="color:var(--text-secondary);font-size:0.85rem;">鏀寔 PNG / JPEG / WebP锛屽崟鏂囦欢鏈€澶?20MB</p>
             <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" style="display:none;" multiple>
         </div>
 
         <div id="previewArea" style="display:none;">
             <div class="controls-row">
-                <label style="font-weight:600;white-space:nowrap;">压缩质量：</label>
+                <label style="font-weight:600;white-space:nowrap;">鍘嬬缉璐ㄩ噺锛?/label>
                 <input type="range" id="qualityRange" min="10" max="100" value="75" style="flex:1;max-width:300px;">
                 <span id="qualityLabel" style="font-weight:600;min-width:40px;">75%</span>
                 <select id="formatSelect" style="width:auto;">
-                    <option value="auto">保持原格式</option>
+                    <option value="auto">淇濇寔鍘熸牸寮?/option>
                     <option value="image/jpeg">JPEG</option>
                     <option value="image/png">PNG</option>
                     <option value="image/webp">WebP</option>
                 </select>
-                <button class="btn btn-primary" onclick="compressAll()">🔽 压缩全部</button>
-                <button class="btn btn-secondary" onclick="downloadAll()">📥 下载全部</button>
+                <button class="btn btn-primary" onclick="compressAll()">馃斀 鍘嬬缉鍏ㄩ儴</button>
+                <button class="btn btn-secondary" onclick="downloadAll()">馃摜 涓嬭浇鍏ㄩ儴</button>
             </div>
             <div id="imageList" style="display:flex;flex-direction:column;gap:12px;"></div>
         </div>
 
-        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+        <div class="ad-slot" style="margin-top:24px;">骞垮憡浣?- Google AdSense</div>
     </div>
 </main>
 
 <footer>
-    <p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p>
+    <p>&copy; 2025 鍦ㄧ嚎宸ュ叿绠?| <a href="/sitemap.xml">缃戠珯鍦板浘</a></p>
 </footer>
 
 <script src="../js/common.js"></script>
@@ -108,9 +107,9 @@ function renderImages() {
         div.style.cssText = "display:flex;align-items:center;gap:16px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);";
         div.innerHTML = '<img src="' + img.original + '" style="width:80px;height:80px;object-fit:cover;border-radius:6px;">' +
             '<div style="flex:1;min-width:0;"><p style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + img.name + '</p>' +
-            '<p style="font-size:0.85rem;color:var(--text-secondary);">原始: ' + formatSize(img.size) + (img.compSize ? ' → 压缩后: ' + formatSize(img.compSize) + ' (节省 ' + Math.round((1 - img.compSize/img.size)*100) + '%)' : '') + '</p></div>' +
-            '<button class="btn btn-primary" style="white-space:nowrap;font-size:0.85rem;" onclick="compressOne(' + i + ')">压缩</button>' +
-            '<button class="btn btn-secondary" style="white-space:nowrap;font-size:0.85rem;" onclick="downloadOne(' + i + ')" ' + (img.compressed ? '' : 'disabled') + '>下载</button>';
+            '<p style="font-size:0.85rem;color:var(--text-secondary);">鍘熷: ' + formatSize(img.size) + (img.compSize ? ' 鈫?鍘嬬缉鍚? ' + formatSize(img.compSize) + ' (鑺傜渷 ' + Math.round((1 - img.compSize/img.size)*100) + '%)' : '') + '</p></div>' +
+            '<button class="btn btn-primary" style="white-space:nowrap;font-size:0.85rem;" onclick="compressOne(' + i + ')">鍘嬬缉</button>' +
+            '<button class="btn btn-secondary" style="white-space:nowrap;font-size:0.85rem;" onclick="downloadOne(' + i + ')" ' + (img.compressed ? '' : 'disabled') + '>涓嬭浇</button>';
         imageList.appendChild(div);
     }
 }

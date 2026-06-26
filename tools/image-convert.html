@@ -4,8 +4,8 @@
     <base href="https://toolhub.uno/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线图片格式转换</title>
-    <meta name="description" content="免费在线图片格式转换工具，支持PNG/JPEG/WebP/BMP等格式互转，浏览器本地处理，安全快速。">
+    <title>鍦ㄧ嚎鍥剧墖鏍煎紡杞崲</title>
+    <meta name="description" content="鍏嶈垂鍦ㄧ嚎鍥剧墖鏍煎紡杞崲宸ュ叿锛屾敮鎸丳NG/JPEG/WebP/BMP绛夋牸寮忎簰杞紝娴忚鍣ㄦ湰鍦板鐞嗭紝瀹夊叏蹇€熴€?>
     <link rel="stylesheet" href="../css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
@@ -17,27 +17,26 @@
     <div class="header-inner">
         <a href="/" class="logo">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            在线工具箱
-        </a>
+            鍦ㄧ嚎宸ュ叿绠?        </a>
         <nav class="header-nav">
-            <a href="../index.html">首页</a>
-            <a href="../tools/image-compress.html">图片工具</a>
-            <a href="../tools/qrcode.html">生成工具</a>
-            <a href="../tools/json-formatter.html">开发工具</a>
+            <a href="../index.html">棣栭〉</a>
+            <a href="../tools/image-compress.html">鍥剧墖宸ュ叿</a>
+            <a href="../tools/qrcode.html">鐢熸垚宸ュ叿</a>
+            <a href="../tools/json-formatter.html">寮€鍙戝伐鍏?/a>
         </nav>
     </div>
 </header>
 
 <main class="tool-page container">
     <div class="tool-page-header">
-        <h1>🔄 图片格式转换</h1>
-        <p>上传图片，选择目标格式即可转换，支持 PNG、JPEG、WebP、BMP 互转。</p>
+        <h1>馃攧 鍥剧墖鏍煎紡杞崲</h1>
+        <p>涓婁紶鍥剧墖锛岄€夋嫨鐩爣鏍煎紡鍗冲彲杞崲锛屾敮鎸?PNG銆丣PEG銆乄ebP銆丅MP 浜掕浆銆?/p>
     </div>
     <div class="tool-workspace">
         <div style="text-align:center;padding:30px 20px;border:2px dashed var(--border);border-radius:var(--radius);cursor:pointer;margin-bottom:16px;" onclick="document.getElementById(''fileInput''.replace(/''/g,'')).click()">
-    <div style="font-size:3rem;margin-bottom:12px;">📁</div>
-    <p style="font-weight:600;margin-bottom:4px;">点击选择图片</p>
-    <p style="color:var(--text-secondary);font-size:0.85rem;">支持 PNG / JPEG / WebP / BMP</p>
+    <div style="font-size:3rem;margin-bottom:12px;">馃搧</div>
+    <p style="font-weight:600;margin-bottom:4px;">鐐瑰嚮閫夋嫨鍥剧墖</p>
+    <p style="color:var(--text-secondary);font-size:0.85rem;">鏀寔 PNG / JPEG / WebP / BMP</p>
     <input type="file" id="fileInput" accept="image/*" onchange="loadImage()" style="display:none;">
 </div>
 <div id="convertArea" style="display:none;">
@@ -46,15 +45,15 @@
         <p style="font-size:0.9rem;color:var(--text-secondary);" id="fileInfo"></p>
     </div>
     <div class="controls-row">
-        <label style="font-weight:600;">转换为：</label>
+        <label style="font-weight:600;">杞崲涓猴細</label>
         <select id="formatSelect" style="width:auto;">
             <option value="image/png">PNG</option>
             <option value="image/jpeg">JPEG</option>
             <option value="image/webp">WebP</option>
             <option value="image/bmp">BMP</option>
         </select>
-        <button class="btn btn-primary" onclick="convertImage()">🔄 转换</button>
-        <button class="btn btn-secondary" onclick="downloadResult()" id="dlBtn" disabled>📥 下载</button>
+        <button class="btn btn-primary" onclick="convertImage()">馃攧 杞崲</button>
+        <button class="btn btn-secondary" onclick="downloadResult()" id="dlBtn" disabled>馃摜 涓嬭浇</button>
     </div>
 </div>
 <script>
@@ -85,7 +84,7 @@ function convertImage() {
                 resultData = e.target.result;
                 document.getElementById("previewImg").src = resultData;
                 document.getElementById("dlBtn").disabled = false;
-                showToast("转换完成！");
+                showToast("杞崲瀹屾垚锛?);
             };
             reader.readAsDataURL(blob);
         }, format, 0.9);
@@ -98,11 +97,11 @@ function downloadResult() {
     downloadFile(resultData, "converted." + format, "application/octet-stream");
 }
 </script>
-        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+        <div class="ad-slot" style="margin-top:24px;">骞垮憡浣?- Google AdSense</div>
     </div>
 </main>
 
-<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<footer><p>&copy; 2025 鍦ㄧ嚎宸ュ叿绠?| <a href="/sitemap.xml">缃戠珯鍦板浘</a></p></footer>
 <script src="../js/common.js"></script>
 </body>
 </html>

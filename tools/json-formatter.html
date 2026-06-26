@@ -4,8 +4,8 @@
     <base href="https://toolhub.uno/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON在线格式化 - JSON格式化、压缩、验证、树形查看工具</title>
-    <meta name="description" content="免费在线JSON格式化工具，支持JSON格式化、压缩、验证语法、树形结构查看。开发调试必备工具，浏览器本地处理，数据不上传。">
+    <title>JSON鍦ㄧ嚎鏍煎紡鍖?- JSON鏍煎紡鍖栥€佸帇缂┿€侀獙璇併€佹爲褰㈡煡鐪嬪伐鍏?/title>
+    <meta name="description" content="鍏嶈垂鍦ㄧ嚎JSON鏍煎紡鍖栧伐鍏凤紝鏀寔JSON鏍煎紡鍖栥€佸帇缂┿€侀獙璇佽娉曘€佹爲褰㈢粨鏋勬煡鐪嬨€傚紑鍙戣皟璇曞繀澶囧伐鍏凤紝娴忚鍣ㄦ湰鍦板鐞嗭紝鏁版嵁涓嶄笂浼犮€?>
     <link rel="stylesheet" href="../css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
@@ -17,44 +17,43 @@
     <div class="header-inner">
         <a href="/" class="logo">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            在线工具箱
-        </a>
+            鍦ㄧ嚎宸ュ叿绠?        </a>
         <nav class="header-nav">
-            <a href="../index.html">首页</a>
-            <a href="../tools/image-compress.html">图片工具</a>
-            <a href="../tools/qrcode.html">生成工具</a>
-            <a href="../tools/json-formatter.html">开发工具</a>
+            <a href="../index.html">棣栭〉</a>
+            <a href="../tools/image-compress.html">鍥剧墖宸ュ叿</a>
+            <a href="../tools/qrcode.html">鐢熸垚宸ュ叿</a>
+            <a href="../tools/json-formatter.html">寮€鍙戝伐鍏?/a>
         </nav>
     </div>
 </header>
 
 <main class="tool-page container">
     <div class="tool-page-header">
-        <h1>📋 JSON 格式化工具</h1>
-        <p>JSON 格式化、压缩、验证语法、树形结构查看 —— 开发调试必备。</p>
+        <h1>馃搵 JSON 鏍煎紡鍖栧伐鍏?/h1>
+        <p>JSON 鏍煎紡鍖栥€佸帇缂┿€侀獙璇佽娉曘€佹爲褰㈢粨鏋勬煡鐪?鈥斺€?寮€鍙戣皟璇曞繀澶囥€?/p>
     </div>
 
     <div class="tool-workspace">
         <div style="display:flex;gap:24px;flex-wrap:wrap;">
             <div style="flex:1;min-width:280px;">
-                <textarea id="jsonInput" placeholder='粘贴 JSON 数据，例如：{"name":"张三","age":25}' style="min-height:220px;font-family:monospace;font-size:0.9rem;"></textarea>
+                <textarea id="jsonInput" placeholder='绮樿创 JSON 鏁版嵁锛屼緥濡傦細{"name":"寮犱笁","age":25}' style="min-height:220px;font-family:monospace;font-size:0.9rem;"></textarea>
                 <div class="controls-row">
-                    <button class="btn btn-primary" onclick="formatJSON()">✨ 格式化</button>
-                    <button class="btn btn-secondary" onclick="compressJSON()">🗜️ 压缩</button>
-                    <button class="btn btn-secondary" onclick="validateJSON()">✅ 验证</button>
-                    <button class="btn btn-secondary" onclick="copyResult()">📋 复制结果</button>
-                    <button class="btn btn-secondary" onclick="clearAll()">🗑️ 清空</button>
+                    <button class="btn btn-primary" onclick="formatJSON()">鉁?鏍煎紡鍖?/button>
+                    <button class="btn btn-secondary" onclick="compressJSON()">馃棞锔?鍘嬬缉</button>
+                    <button class="btn btn-secondary" onclick="validateJSON()">鉁?楠岃瘉</button>
+                    <button class="btn btn-secondary" onclick="copyResult()">馃搵 澶嶅埗缁撴灉</button>
+                    <button class="btn btn-secondary" onclick="clearAll()">馃棏锔?娓呯┖</button>
                 </div>
             </div>
             <div style="flex:1;min-width:280px;">
-                <div id="jsonOutput" class="result-area" style="background:var(--bg);border:1px solid var(--border);">等待输入...</div>
+                <div id="jsonOutput" class="result-area" style="background:var(--bg);border:1px solid var(--border);">绛夊緟杈撳叆...</div>
             </div>
         </div>
-        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+        <div class="ad-slot" style="margin-top:24px;">骞垮憡浣?- Google AdSense</div>
     </div>
 </main>
 
-<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<footer><p>&copy; 2025 鍦ㄧ嚎宸ュ叿绠?| <a href="/sitemap.xml">缃戠珯鍦板浘</a></p></footer>
 <script src="../js/common.js"></script>
 <script>
 function formatJSON() {
@@ -63,7 +62,7 @@ function formatJSON() {
         var formatted = JSON.stringify(obj, null, 2);
         document.getElementById("jsonOutput").innerHTML = '<pre style="margin:0;white-space:pre-wrap;word-break:break-all;color:#059669;">' + escapeHtml(formatted) + '</pre>';
     } catch(e) {
-        document.getElementById("jsonOutput").innerHTML = '<p style="color:#dc2626;">❌ JSON 格式错误：' + e.message + '</p>';
+        document.getElementById("jsonOutput").innerHTML = '<p style="color:#dc2626;">鉂?JSON 鏍煎紡閿欒锛? + e.message + '</p>';
     }
 }
 
@@ -73,21 +72,21 @@ function compressJSON() {
         var compressed = JSON.stringify(obj);
         document.getElementById("jsonOutput").innerHTML = '<pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + escapeHtml(compressed) + '</pre>';
     } catch(e) {
-        document.getElementById("jsonOutput").innerHTML = '<p style="color:#dc2626;">❌ JSON 格式错误：' + e.message + '</p>';
+        document.getElementById("jsonOutput").innerHTML = '<p style="color:#dc2626;">鉂?JSON 鏍煎紡閿欒锛? + e.message + '</p>';
     }
 }
 
 function validateJSON() {
     try {
         var obj = JSON.parse(document.getElementById("jsonInput").value);
-        document.getElementById("jsonOutput").innerHTML = '<p style="color:#059669;">✅ JSON 格式正确！共 ' + Object.keys(obj).length + ' 个顶层键</p>';
+        document.getElementById("jsonOutput").innerHTML = '<p style="color:#059669;">鉁?JSON 鏍煎紡姝ｇ‘锛佸叡 ' + Object.keys(obj).length + ' 涓《灞傞敭</p>';
     } catch(e) {
-        document.getElementById("jsonOutput").innerHTML = '<p style="color:#dc2626;">❌ ' + e.message + '</p>';
+        document.getElementById("jsonOutput").innerHTML = '<p style="color:#dc2626;">鉂?' + e.message + '</p>';
     }
 }
 
 function copyResult() { copyToClipboard(document.getElementById("jsonOutput").textContent); }
-function clearAll() { document.getElementById("jsonInput").value = ""; document.getElementById("jsonOutput").innerHTML = "等待输入..."; }
+function clearAll() { document.getElementById("jsonInput").value = ""; document.getElementById("jsonOutput").innerHTML = "绛夊緟杈撳叆..."; }
 function escapeHtml(str) { return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 </script>
 </body>

@@ -4,8 +4,8 @@
     <base href="https://toolhub.uno/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL在线编解码 - URL编码解码工具</title>
-    <meta name="description" content="免费在线URL编码解码工具，支持URL参数编码解码，处理中文和特殊字符。">
+    <title>URL鍦ㄧ嚎缂栬В鐮?- URL缂栫爜瑙ｇ爜宸ュ叿</title>
+    <meta name="description" content="鍏嶈垂鍦ㄧ嚎URL缂栫爜瑙ｇ爜宸ュ叿锛屾敮鎸乁RL鍙傛暟缂栫爜瑙ｇ爜锛屽鐞嗕腑鏂囧拰鐗规畩瀛楃銆?>
     <link rel="stylesheet" href="../css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
@@ -17,58 +17,57 @@
     <div class="header-inner">
         <a href="/" class="logo">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            在线工具箱
-        </a>
+            鍦ㄧ嚎宸ュ叿绠?        </a>
         <nav class="header-nav">
-            <a href="../index.html">首页</a>
-            <a href="../tools/image-compress.html">图片工具</a>
-            <a href="../tools/qrcode.html">生成工具</a>
-            <a href="../tools/json-formatter.html">开发工具</a>
+            <a href="../index.html">棣栭〉</a>
+            <a href="../tools/image-compress.html">鍥剧墖宸ュ叿</a>
+            <a href="../tools/qrcode.html">鐢熸垚宸ュ叿</a>
+            <a href="../tools/json-formatter.html">寮€鍙戝伐鍏?/a>
         </nav>
     </div>
 </header>
 
 <main class="tool-page container">
     <div class="tool-page-header">
-        <h1>🔗 URL 编解码</h1>
-        <p>URL 编码和解码工具，处理网址中的中文和特殊字符。</p>
+        <h1>馃敆 URL 缂栬В鐮?/h1>
+        <p>URL 缂栫爜鍜岃В鐮佸伐鍏凤紝澶勭悊缃戝潃涓殑涓枃鍜岀壒娈婂瓧绗︺€?/p>
     </div>
     <div class="tool-workspace">
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
     <div style="flex:1;min-width:280px;">
-        <textarea id="inputText" placeholder="输入要编码的文本或要解码的URL..." style="min-height:180px;font-family:monospace;"></textarea>
+        <textarea id="inputText" placeholder="杈撳叆瑕佺紪鐮佺殑鏂囨湰鎴栬瑙ｇ爜鐨刄RL..." style="min-height:180px;font-family:monospace;"></textarea>
         <div class="controls-row">
-            <button class="btn btn-primary" onclick="urlEncode()">🔒 URL编码</button>
-            <button class="btn btn-primary" onclick="urlDecode()">🔓 URL解码</button>
-            <button class="btn btn-secondary" onclick="copyResult()">📋 复制</button>
+            <button class="btn btn-primary" onclick="urlEncode()">馃敀 URL缂栫爜</button>
+            <button class="btn btn-primary" onclick="urlDecode()">馃敁 URL瑙ｇ爜</button>
+            <button class="btn btn-secondary" onclick="copyResult()">馃搵 澶嶅埗</button>
         </div>
     </div>
     <div style="flex:1;min-width:280px;">
-        <div id="outputArea" class="result-area" style="background:var(--bg);border:1px solid var(--border);min-height:180px;">等待输入...</div>
+        <div id="outputArea" class="result-area" style="background:var(--bg);border:1px solid var(--border);min-height:180px;">绛夊緟杈撳叆...</div>
     </div>
 </div>
 <script>
 function urlEncode() {
     var t = document.getElementById("inputText").value;
-    if (!t) { showToast("请输入内容"); return; }
+    if (!t) { showToast("璇疯緭鍏ュ唴瀹?); return; }
     document.getElementById("outputArea").innerHTML = '<pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + encodeURIComponent(t) + '</pre>';
 }
 function urlDecode() {
     var t = document.getElementById("inputText").value;
-    if (!t) { showToast("请输入内容"); return; }
+    if (!t) { showToast("璇疯緭鍏ュ唴瀹?); return; }
     try {
         document.getElementById("outputArea").innerHTML = '<pre style="margin:0;white-space:pre-wrap;word-break:break-all;">' + decodeURIComponent(t) + '</pre>';
     } catch(e) {
-        document.getElementById("outputArea").innerHTML = '<p style="color:#dc2626;">解码失败：无效的编码字符串</p>';
+        document.getElementById("outputArea").innerHTML = '<p style="color:#dc2626;">瑙ｇ爜澶辫触锛氭棤鏁堢殑缂栫爜瀛楃涓?/p>';
     }
 }
 function copyResult() { copyToClipboard(document.getElementById("outputArea").textContent); }
 </script>
-        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+        <div class="ad-slot" style="margin-top:24px;">骞垮憡浣?- Google AdSense</div>
     </div>
 </main>
 
-<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<footer><p>&copy; 2025 鍦ㄧ嚎宸ュ叿绠?| <a href="/sitemap.xml">缃戠珯鍦板浘</a></p></footer>
 <script src="../js/common.js"></script>
 </body>
 </html>

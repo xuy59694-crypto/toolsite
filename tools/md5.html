@@ -4,8 +4,8 @@
     <base href="https://toolhub.uno/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线MD5/SHA加密 - MD5、SHA1、SHA256哈希值生成工具</title>
-    <meta name="description" content="免费在线MD5、SHA1、SHA256、SHA512哈希值生成工具，支持文本和文件加密。">
+    <title>鍦ㄧ嚎MD5/SHA鍔犲瘑 - MD5銆丼HA1銆丼HA256鍝堝笇鍊肩敓鎴愬伐鍏?/title>
+    <meta name="description" content="鍏嶈垂鍦ㄧ嚎MD5銆丼HA1銆丼HA256銆丼HA512鍝堝笇鍊肩敓鎴愬伐鍏凤紝鏀寔鏂囨湰鍜屾枃浠跺姞瀵嗐€?>
     <link rel="stylesheet" href="../css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
@@ -17,27 +17,26 @@
     <div class="header-inner">
         <a href="/" class="logo">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            在线工具箱
-        </a>
+            鍦ㄧ嚎宸ュ叿绠?        </a>
         <nav class="header-nav">
-            <a href="../index.html">首页</a>
-            <a href="../tools/image-compress.html">图片工具</a>
-            <a href="../tools/qrcode.html">生成工具</a>
-            <a href="../tools/json-formatter.html">开发工具</a>
+            <a href="../index.html">棣栭〉</a>
+            <a href="../tools/image-compress.html">鍥剧墖宸ュ叿</a>
+            <a href="../tools/qrcode.html">鐢熸垚宸ュ叿</a>
+            <a href="../tools/json-formatter.html">寮€鍙戝伐鍏?/a>
         </nav>
     </div>
 </header>
 
 <main class="tool-page container">
     <div class="tool-page-header">
-        <h1>🔒 MD5 / SHA 加密</h1>
-        <p>生成 MD5、SHA1、SHA256、SHA512 哈希值，支持文本和文件。</p>
+        <h1>馃敀 MD5 / SHA 鍔犲瘑</h1>
+        <p>鐢熸垚 MD5銆丼HA1銆丼HA256銆丼HA512 鍝堝笇鍊硷紝鏀寔鏂囨湰鍜屾枃浠躲€?/p>
     </div>
     <div class="tool-workspace">
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
     <div style="flex:1;min-width:280px;">
-        <label style="font-weight:600;display:block;margin-bottom:6px;">输入文本</label>
-        <textarea id="textInput" placeholder="输入要加密的文本..." style="min-height:120px;font-family:monospace;"></textarea>
+        <label style="font-weight:600;display:block;margin-bottom:6px;">杈撳叆鏂囨湰</label>
+        <textarea id="textInput" placeholder="杈撳叆瑕佸姞瀵嗙殑鏂囨湰..." style="min-height:120px;font-family:monospace;"></textarea>
         <div class="controls-row">
             <button class="btn btn-primary" onclick="hash('MD5')">MD5</button>
             <button class="btn btn-primary" onclick="hash('SHA-1')">SHA-1</button>
@@ -45,26 +44,26 @@
             <button class="btn btn-primary" onclick="hash('SHA-512')">SHA-512</button>
         </div>
         <div style="margin-top:16px;">
-            <label style="font-weight:600;display:block;margin-bottom:6px;">或上传文件</label>
+            <label style="font-weight:600;display:block;margin-bottom:6px;">鎴栦笂浼犳枃浠?/label>
             <input type="file" id="fileInput" onchange="hashFile()">
         </div>
     </div>
     <div style="flex:1;min-width:280px;">
         <div id="resultArea" style="padding:16px;background:var(--bg-secondary);border-radius:var(--radius-sm);min-height:100px;">
-            <p style="color:var(--text-secondary);">选择算法并输入文本后查看结果</p>
+            <p style="color:var(--text-secondary);">閫夋嫨绠楁硶骞惰緭鍏ユ枃鏈悗鏌ョ湅缁撴灉</p>
         </div>
     </div>
 </div>
 <script>
 async function hash(algo) {
     var t = document.getElementById("textInput").value;
-    if (!t) { showToast("请输入文本"); return; }
+    if (!t) { showToast("璇疯緭鍏ユ枃鏈?); return; }
     var encoder = new TextEncoder();
     var data = encoder.encode(t);
     var hashBuffer = await crypto.subtle.digest(algo, data);
     var hashArray = Array.from(new Uint8Array(hashBuffer));
     var hashHex = hashArray.map(function(b){ return b.toString(16).padStart(2,"0"); }).join("");
-    document.getElementById("resultArea").innerHTML = '<p style="font-weight:600;margin-bottom:8px;">' + algo + ' 结果：</p><pre style="margin:0;white-space:pre-wrap;word-break:break-all;font-size:0.9rem;background:#fff;padding:12px;border-radius:6px;">' + hashHex + '</pre>';
+    document.getElementById("resultArea").innerHTML = '<p style="font-weight:600;margin-bottom:8px;">' + algo + ' 缁撴灉锛?/p><pre style="margin:0;white-space:pre-wrap;word-break:break-all;font-size:0.9rem;background:#fff;padding:12px;border-radius:6px;">' + hashHex + '</pre>';
 }
 
 async function hashFile() {
@@ -74,14 +73,14 @@ async function hashFile() {
     var hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
     var hashArray = Array.from(new Uint8Array(hashBuffer));
     var hashHex = hashArray.map(function(b){ return b.toString(16).padStart(2,"0"); }).join("");
-    document.getElementById("resultArea").innerHTML = '<p style="font-weight:600;margin-bottom:8px;">文件 SHA-256：</p><pre style="margin:0;white-space:pre-wrap;word-break:break-all;font-size:0.9rem;background:#fff;padding:12px;border-radius:6px;">' + hashHex + '</pre><p style="font-size:0.85rem;color:var(--text-secondary);margin-top:8px;">文件名：' + file.name + '</p>';
+    document.getElementById("resultArea").innerHTML = '<p style="font-weight:600;margin-bottom:8px;">鏂囦欢 SHA-256锛?/p><pre style="margin:0;white-space:pre-wrap;word-break:break-all;font-size:0.9rem;background:#fff;padding:12px;border-radius:6px;">' + hashHex + '</pre><p style="font-size:0.85rem;color:var(--text-secondary);margin-top:8px;">鏂囦欢鍚嶏細' + file.name + '</p>';
 }
 </script>
-        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+        <div class="ad-slot" style="margin-top:24px;">骞垮憡浣?- Google AdSense</div>
     </div>
 </main>
 
-<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<footer><p>&copy; 2025 鍦ㄧ嚎宸ュ叿绠?| <a href="/sitemap.xml">缃戠珯鍦板浘</a></p></footer>
 <script src="../js/common.js"></script>
 </body>
 </html>

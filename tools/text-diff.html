@@ -4,8 +4,8 @@
     <base href="https://toolhub.uno/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线文本差异对比 - 对比两段文本差异，高亮增删改内容</title>
-    <meta name="description" content="免费在线文本差异对比工具，对比两段文本的差异，高亮显示新增、删除和修改的内容。适用于代码审查、文档对比。">
+    <title>鍦ㄧ嚎鏂囨湰宸紓瀵规瘮 - 瀵规瘮涓ゆ鏂囨湰宸紓锛岄珮浜鍒犳敼鍐呭</title>
+    <meta name="description" content="鍏嶈垂鍦ㄧ嚎鏂囨湰宸紓瀵规瘮宸ュ叿锛屽姣斾袱娈垫枃鏈殑宸紓锛岄珮浜樉绀烘柊澧炪€佸垹闄ゅ拰淇敼鐨勫唴瀹广€傞€傜敤浜庝唬鐮佸鏌ャ€佹枃妗ｅ姣斻€?>
     <link rel="stylesheet" href="../css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 <script>
@@ -17,50 +17,49 @@
     <div class="header-inner">
         <a href="/" class="logo">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            在线工具箱
-        </a>
+            鍦ㄧ嚎宸ュ叿绠?        </a>
         <nav class="header-nav">
-            <a href="../index.html">首页</a>
-            <a href="../tools/image-compress.html">图片工具</a>
-            <a href="../tools/qrcode.html">生成工具</a>
-            <a href="../tools/json-formatter.html">开发工具</a>
+            <a href="../index.html">棣栭〉</a>
+            <a href="../tools/image-compress.html">鍥剧墖宸ュ叿</a>
+            <a href="../tools/qrcode.html">鐢熸垚宸ュ叿</a>
+            <a href="../tools/json-formatter.html">寮€鍙戝伐鍏?/a>
         </nav>
     </div>
 </header>
 
 <main class="tool-page container">
     <div class="tool-page-header">
-        <h1>🔍 文本差异对比</h1>
-        <p>对比两段文本，高亮显示差异 —— 适用于代码审查、文档版本对比。</p>
+        <h1>馃攳 鏂囨湰宸紓瀵规瘮</h1>
+        <p>瀵规瘮涓ゆ鏂囨湰锛岄珮浜樉绀哄樊寮?鈥斺€?閫傜敤浜庝唬鐮佸鏌ャ€佹枃妗ｇ増鏈姣斻€?/p>
     </div>
 
     <div class="tool-workspace">
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
             <div style="flex:1;min-width:280px;">
-                <label style="font-weight:600;display:block;margin-bottom:6px;">原始文本</label>
-                <textarea id="text1" placeholder="粘贴第一段文本..." style="min-height:200px;font-family:monospace;"></textarea>
+                <label style="font-weight:600;display:block;margin-bottom:6px;">鍘熷鏂囨湰</label>
+                <textarea id="text1" placeholder="绮樿创绗竴娈垫枃鏈?.." style="min-height:200px;font-family:monospace;"></textarea>
             </div>
             <div style="flex:1;min-width:280px;">
-                <label style="font-weight:600;display:block;margin-bottom:6px;">对比文本</label>
-                <textarea id="text2" placeholder="粘贴第二段文本..." style="min-height:200px;font-family:monospace;"></textarea>
+                <label style="font-weight:600;display:block;margin-bottom:6px;">瀵规瘮鏂囨湰</label>
+                <textarea id="text2" placeholder="绮樿创绗簩娈垫枃鏈?.." style="min-height:200px;font-family:monospace;"></textarea>
             </div>
         </div>
         <div class="controls-row" style="margin-top:16px;">
-            <button class="btn btn-primary" onclick="compareText()">🔍 对比差异</button>
-            <button class="btn btn-secondary" onclick="clearText()">🗑️ 清空</button>
+            <button class="btn btn-primary" onclick="compareText()">馃攳 瀵规瘮宸紓</button>
+            <button class="btn btn-secondary" onclick="clearText()">馃棏锔?娓呯┖</button>
         </div>
         <div id="diffResult" style="margin-top:16px;max-height:500px;overflow-y:auto;"></div>
-        <div class="ad-slot" style="margin-top:24px;">广告位 - Google AdSense</div>
+        <div class="ad-slot" style="margin-top:24px;">骞垮憡浣?- Google AdSense</div>
     </div>
 </main>
 
-<footer><p>&copy; 2025 在线工具箱 | <a href="/sitemap.xml">网站地图</a></p></footer>
+<footer><p>&copy; 2025 鍦ㄧ嚎宸ュ叿绠?| <a href="/sitemap.xml">缃戠珯鍦板浘</a></p></footer>
 <script src="../js/common.js"></script>
 <script>
 function compareText() {
     var t1 = document.getElementById("text1").value;
     var t2 = document.getElementById("text2").value;
-    if (!t1 && !t2) { showToast("请输入文本"); return; }
+    if (!t1 && !t2) { showToast("璇疯緭鍏ユ枃鏈?); return; }
     
     var lines1 = t1.split("\n");
     var lines2 = t2.split("\n");
